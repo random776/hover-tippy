@@ -10,7 +10,7 @@ export default function App() {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    fetch("markdown/test.md") // markdownのデータを取得
+    fetch("./markdown/test.md") // markdownのデータを取得
       .then((response) => response.text()) // Extract text from response
       .then((data) => setText(data)) // Set text state
       .catch((error) => console.error("Error fetching data:", error));
