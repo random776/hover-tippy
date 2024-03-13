@@ -5,12 +5,13 @@ import Markdown from "react-markdown"; // markdownからreactnodeへ変換（パ
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math"; // 数式の表示を可能とするものたち。
 import "katex/dist/katex.min.css";
+import TestMd from "/test.md?url";
 
 export default function App() {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    fetch("./markdown/test.md") // markdownのデータを取得
+    fetch(TestMd) // markdownのデータを取得
       .then((response) => response.text()) // Extract text from response
       .then((data) => setText(data)) // Set text state
       .catch((error) => console.error("Error fetching data:", error));
