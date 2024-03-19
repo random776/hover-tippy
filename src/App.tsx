@@ -8,7 +8,7 @@ import "katex/dist/katex.min.css";
 import TestMd from "/test.md?url";
 import { mdModify } from "./utils/mdModify";
 import Hoge from "/hoge.html?url";
-import parse from "html-react-parser";
+import parse, { Element, HTMLReactParserOptions } from 'html-react-parser';
 
 export default function App() {
   const [text, setText] = useState("");
@@ -31,13 +31,14 @@ export default function App() {
   const primer = html.split("ut.code();Learn");
   const rep = primer.join("<p class='utcodeLearn'>ut.code();Learn</p>");
 
-  const options = {
-    replace({ attribs }: { attribs: any }) {
-      if (!attribs) {
-        return;
-      }
+  const options: HTMLReactParserOptions = {
+    replace(domNode) {
+      
 
-      if (attribs.class === "utcodeLearn") {
+      if (
+        domNode instanceof Element &&
+        domNode.attribs.class === 'utcodeLearn'
+      ) {
         return (
           <Tippy
             content={
