@@ -7,7 +7,6 @@ import remarkMath from "remark-math"; // 数式の表示を可能とするもの
 import "katex/dist/katex.min.css";
 import TestMd from "/test.md?url";
 import { mdModify } from "./utils/mdModify";
-import Hoge from "/hoge.html?url";
 import parse, { Element, HTMLReactParserOptions } from 'html-react-parser';
 
 export default function App() {
@@ -22,19 +21,18 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    fetch(Hoge) // htmlのデータを取得
+    fetch("https://learn.utcode.net") // htmlのデータを取得
       .then((response) => response.text()) // Extract text from response
       .then((data) => setHtml(data)) // Set text state
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-  const primer = html.split("ut.code();Learn");
+  const primer = html.split("ut.code(); Learn");
   const rep = primer.join("<p class='utcodeLearn'>ut.code();Learn</p>");
 
   const options: HTMLReactParserOptions = {
     replace(domNode) {
       
-
       if (
         domNode instanceof Element &&
         domNode.attribs.class === 'utcodeLearn'
@@ -46,7 +44,7 @@ export default function App() {
                 rehypePlugins={[rehypeKatex]}
                 remarkPlugins={[remarkMath]}
               >
-                {mdModify(text, "ut.code();Learn")}
+                {mdModify(text, "ut.code(); Learn")}
               </Markdown>
             }
           >
