@@ -8,8 +8,7 @@ import "katex/dist/katex.min.css";
 import TestMd from "/test.md?url";
 import { mdModify } from "./utils/mdModify";
 import Hoge from "/hoge.html?url";
-// import parse, { DOMNode, domToReact } from "html-react-parser";
-// import { JSX } from "react/jsx-runtime";
+import parse from "html-react-parser";
 
 export default function App() {
   const [text, setText] = useState("");
@@ -29,26 +28,37 @@ export default function App() {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-  // const rep = html.replace(
-  // "ut.code();Learn",
-  // "<Tippy content={<Markdown rehypePlugins={[rehypeKatex]} remarkPlugins={[remarkMath]}>{mdModify(text, 'ut.code();Learn')}</Markdown>}<p>ut.code();Learn</p></Tippy>"
-  // );
+  const primer = html.split("ut.code();Learn");
+  const rep = primer.join("<p class='utcodeLearn'>ut.code();Learn</p>");
+
+  const options = {
+    replace({ attribs }: { attribs: any }) {
+      if (!attribs) {
+        return;
+      }
+
+      if (attribs.class === "utcodeLearn") {
+        return (
+          <Tippy
+            content={
+              <Markdown
+                rehypePlugins={[rehypeKatex]}
+                remarkPlugins={[remarkMath]}
+              >
+                {mdModify(text, "ut.code();Learn")}
+              </Markdown>
+            }
+          >
+            <span>ut.code();Learn</span>
+          </Tippy>
+        );
+      }
+    },
+  };
 
   return (
     <>
-      <Tippy
-        content={
-          <Markdown rehypePlugins={[rehypeKatex]} remarkPlugins={[remarkMath]}>
-            {mdModify(text, "ut.code();Learn")}
-          </Markdown>
-        }
-      >
-        <p>ut.code();Learn</p>
-      </Tippy>
-
-      <p>
-        <iframe width="500" height="400" srcDoc={html}></iframe>
-      </p>
+      <p>{parse(rep, options)}</p>
     </>
   );
 }

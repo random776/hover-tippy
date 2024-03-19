@@ -11,9 +11,7 @@ export function mdModify(text: string, title: any) {
         })
       : [];
 
-  const learnSection = modifiedSections.find(
-    (section: { title: any }) => section.title === title
-  );
+  const learnSection = modifiedSections.find((item) => item.title === title);
   const learnContent = learnSection ? learnSection.content : "";
   return learnContent;
 }
