@@ -6,6 +6,10 @@
 
 - ユーザーはMarkdownをもちいて解説を作成します。
 
+## オンラインで表示
+
+- [https://hover-tippy.onrender.com/#__docusaurus_skipToContent_fallback](https://hover-tippy.onrender.com/#__docusaurus_skipToContent_fallback)
+
 ## 使ったパッケージ
 
 - [@tippyjs/react](https://github.com/atomiks/tippyjs-react)
@@ -19,11 +23,11 @@
 - `public/test.md`
   - 解説作成のためにユーザーが入力する部分。
 
-- `src/public/hoge.html`
+- `/public/hoge.html`
   - html（本番環境では講義資料）の元データ
 
 - `src/utils/mdModify.tsx`
   - `public/test.md` の解説データを、`src/utils/convertHtml.tsx` が利用できる形に変更する。
 
-- `utils/convertHtml.tsx`
+- `src/utils/convertHtml.tsx`
   - `public/hoge.html` 講義資料を、`src/utils/mdModify.tsx` を用いて、ホバーで解説が表示できるよう改変する。
