@@ -8,7 +8,7 @@
 
 ## オンラインで表示
 
-- [https://hover-tippy.onrender.com/#__docusaurus_skipToContent_fallback](https://hover-tippy.onrender.com/#__docusaurus_skipToContent_fallback)
+- [https://hover-tippy.onrender.com/#__docusaurus_skipToContent_fallback](https://hover-tippy.onrender.com)
 
 ## 使ったパッケージ
 
